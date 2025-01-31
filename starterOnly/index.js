@@ -74,8 +74,40 @@ function validate(){
 	}
 
 	if(flag){
-		return true;
+		msgValidate();
+		return false;
 	}else{
 		return false;
 	}
+}
+
+function msgValidate(){
+	console.log("msgValidate");
+	const formData = document.getElementsByName("reserve")[0];
+	const btnClose = document.getElementById("closeForm");
+	const message = document.getElementById("validate-message")
+	const modalBody = document.querySelector(".modal-body");
+	
+	const width = window.innerWidth;
+
+	formData.style.display = "none";
+	btnClose.classList.remove("btn-hide");
+	btnClose.classList.add("btn-show");
+	message.style.display = "block";
+	message.style.textAlign = "center";
+	message.style.fontSize = "36px";
+
+	if(width < 540){
+		modalBody.style.height = "580px";
+	}else{
+		modalBody.style.height = "700px";
+	}
+
+	modalBody.style.display = "flex";
+	modalBody.style.justifyContent = "center";
+	modalBody.style.alignItems = "center";
+
+	btnClose.addEventListener("click", () => {
+		closeModal();
+	})
 }

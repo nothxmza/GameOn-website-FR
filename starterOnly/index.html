@@ -12,22 +12,24 @@
     />
   </head>
   <body>
-    <div class="topnav" id="myTopnav">
-      <div class="header-logo">
-      <img alt="logo" src="Logo.png" width="auto" height="auto" />
-    </div>
-    <div class="main-navbar">
-      
-      <a href="#" class="active"><span>Accueil</span></a>
-      <a href="#"><span>Détails de l'évènement</span></a>
-      <a href="#"><span>À propos</span></a>
-      <a href="#"><span>Contact</span></a>
-      <a href="#"><span>Évènements passés</span></a>
-      <a href="javascript:void(0);" class="icon" onclick="editNav()">
-        <i class="fa fa-bars"></i>
-      </a>
-    </div>
-    </div>
+    <header>
+      <nav>
+        <div class="topnav" id="myTopnav">
+          <div class="header-logo">
+          <img alt="logo" src="Logo.png" width="auto" height="auto" />
+        </div>
+        <div class="main-navbar">
+          <a href="#" class="active"><span>Accueil</span></a>
+          <a href="#"><span>Détails de l'évènement</span></a>
+          <a href="#"><span>À propos</span></a>
+          <a href="#"><span>Contact</span></a>
+          <a href="#"><span>Évènements passés</span></a>
+          <a href="javascript:void(0);" class="icon" onclick="editNav()">
+            <i class="fa fa-bars"></i>
+          </a>
+        </div>
+      </nav>
+    </header>
   </div>
     <main>
       <div class="hero-section">
@@ -56,6 +58,7 @@
         <div class="content">
           <span class="close" onclick="closeModal()"></span>
           <div class="modal-body">
+            <h2 id="validate-message">Merci ! Votre réservation a été reçue</h2>
             <form
               name="reserve"
               action="index.html"
@@ -191,7 +194,6 @@
                   type="checkbox"
                   id="checkbox1"
                   name="terms"
-                  checked
                 />
                 <label class="checkbox2-label" for="checkbox1">
                   <span class="checkbox-icon"></span>
@@ -213,6 +215,7 @@
                 value="C'est parti"
               />
             </form>
+            <button id="closeForm" class="btn-submit btn-hide">Fermer</button>
           </div>
         </div>
       </div>
