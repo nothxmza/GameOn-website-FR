@@ -1,98 +1,172 @@
-function validate(){
-	let flag = true;
-	const errorMessage = document.getElementsByClassName('error-message');
+let input = {
+	firstName: false,
+	lastName: false,
+	email: false,
+	birthdate: false,
+	quantity: false,
+	location: false,
+	terms: false
+}
 
-	const firstName = document.getElementById('first').value;
-	if(firstName.length < 2){
-		errorMessage[0].textContent = 'Veuillez entrer 2 caractères ou plus pour le champ du prénom.';
-		errorMessage[0].style.display = 'block';
-		flag = false;
+function validateInput(){
+	const btnSubmit = document.querySelector(".btn-submit");
+	const inputValid = Object.values(input).every((value) => value === true);
+
+	if(inputValid){
+		btnSubmit.classList.remove("btn-disabled");
+		btnSubmit.removeAttribute("disabled");
 	}else{
-		errorMessage[0].style.display = 'none';
+		btnSubmit.classList.add("btn-disabled");
+		btnSubmit.setAttribute("disabled", true);
 	}
+}
 
-	const lastName = document.getElementById('last').value;
-	if(lastName.length < 2){
-		errorMessage[1].textContent = 'Veuillez entrer 2 caractères ou plus pour le champ du nom.';
-		errorMessage[1].style.display = 'block';
-		flag = false;
-	}else{
-		errorMessage[1].style.display = 'none';
+function validateFirstName() {
+	const firstName = document.getElementById("first").value;
+	const errorMessage = document.getElementsByClassName("error-message")[0];
+	
+	if(firstName.length < 2) {
+	  errorMessage.textContent = "Veuillez entrer 2 caractères ou plus pour le champ du prénom.";
+	  errorMessage.style.display = "block";
+	  input.firstName = false;
+	} else {
+	  errorMessage.style.display = "none";
+	  input.firstName = true;
 	}
+	validateInput();
+}
 
-	const email = document.getElementById('email').value;
+function validateLastName() {
+	const lastName = document.getElementById("last").value;
+	const errorMessage = document.getElementsByClassName("error-message")[1];
+
+	if(lastName.length < 2) {
+		errorMessage.textContent = "Veuillez entrer 2 caractères ou plus pour le champ du nom.";
+		errorMessage.style.display = "block";
+		input.lastName = false;
+	}
+	else {
+		errorMessage.style.display = "none";
+		input.lastName = true;
+	}
+	validateInput();
+}
+
+function validateEmail() {
+	const email = document.getElementById("email").value;
 	const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-	if(email.length === 0 || !emailRegex.test(email)){
-		errorMessage[2].textContent = "Vous devez entrer une adresse email valide.";
-		errorMessage[2].style.display = "block";
-		flag = false;
-	}else{
-		errorMessage[2].style.display = "none";
-	}
+	const errorMessage = document.getElementsByClassName("error-message")[2];
 
-	const birthdate = document.getElementById('birthdate').value;
-	if(birthdate.length === 0){
-		errorMessage[3].textContent = "Vous devez entrer votre date de naissance.";
-		errorMessage[3].style.display = "block";
-		flag = false;
-	}else{
-		errorMessage[3].style.display = "none";
+	if(email.length === 0 || !emailRegex.test(email)) {
+		errorMessage.textContent = "Vous devez entrer une adresse email valide.";
+		errorMessage.style.display = "block";
+		input.email = false;
 	}
-
-	const quantity = document.getElementById('quantity').value;
-	if(isNaN(quantity)){
-		errorMessage[4].textContent = "Vous devez entrer une valeur numérique.";
-		errorMessage[4].style.display = "block";
-		flag = false;
-	}else{
-		errorMessage[4].style.display = "none";
+	else {
+		errorMessage.style.display = "none";
+		input.email = true;
 	}
+	validateInput();
+}
 
-	const location = document.getElementsByName('location');
+function validateBirthdate() {
+	const birthdate = document.getElementById("birthdate").value;
+	const errorMessage = document.getElementsByClassName("error-message")[3];
+
+	if(birthdate.length === 0) {
+		errorMessage.textContent = "Vous devez entrer votre date de naissance.";
+		errorMessage.style.display = "block";
+		input.birthdate = false;
+	}
+	else {
+		errorMessage.style.display = "none";
+		input.birthdate = true;
+	}
+	validateInput();
+}
+
+function validateQuantity() {
+	const quantity = document.getElementById("quantity").value;
+	const errorMessage = document.getElementsByClassName("error-message")[4];
+
+	if(isNaN(quantity) || quantity.length === 0) {
+		errorMessage.textContent = "Vous devez entrer une valeur numérique.";
+		errorMessage.style.display = "block";
+		input.quantity = false;
+	}
+	else {
+		errorMessage.style.display = "none";
+		input.quantity = true;
+	}
+	validateInput();
+}
+
+function validateLocation() {
+	const location = document.getElementsByName("location");
+	const errorMessage = document.getElementsByClassName("error-message")[5];
 	let locationChecked = false;
-	for(let i = 0; i < location.length; i++){
-		if(location[i].checked){
+
+	for(let i = 0; i < location.length; i++) {
+		if(location[i].checked) {
 			locationChecked = true;
 			break;
 		}
 	}
-	if(!locationChecked){
-		errorMessage[5].textContent = "Vous devez choisir une option.";
-		errorMessage[5].style.display = "block";
-		flag = false;
-	}else{
-		errorMessage[5].style.display = "none";
-	}
 
+	if(!locationChecked) {
+		errorMessage.textContent = "Vous devez choisir une option.";
+		errorMessage.style.display = "block";
+		input.location = false;
+	}
+	else {
+		errorMessage.style.display = "none";
+		input.location = true;
+	}
+	validateInput();
+}
+
+function validateTerms() {
 	const terms = document.getElementById("checkbox1");
-	if(!terms.checked){
-		errorMessage[6].textContent = "Vous devez vérifier que vous acceptez les termes et conditions.";
-		errorMessage[6].style.display = "block";
-		flag = false;
-	}else{
-		errorMessage[6].style.display = "none";
-	}
+	const errorMessage = document.getElementsByClassName("error-message")[6];
 
-	if(flag){
-		msgValidate();
-		return false;
-	}else{
-		return false;
+	if(!terms.checked) {
+		errorMessage.textContent = "Vous devez vérifier que vous acceptez les termes et conditions.";
+		errorMessage.style.display = "block";
+		input.terms = false;
 	}
+	else {
+		errorMessage.style.display = "none";
+		input.terms = true;
+	}
+	validateInput();
+}
+
+document.getElementById("first").addEventListener("input", validateFirstName);
+document.getElementById("last").addEventListener("input", validateLastName);
+document.getElementById("email").addEventListener("input", validateEmail);
+document.getElementById("birthdate").addEventListener("input", validateBirthdate);
+document.getElementById("quantity").addEventListener("input", validateQuantity);
+document.getElementById("checkbox1").addEventListener("input", validateTerms);
+const locations = document.getElementsByName("location");
+for(let i = 0; i < locations.length; i++) {
+	locations[i].addEventListener("input", validateLocation);
 }
 
 function msgValidate(){
-	console.log("msgValidate");
+	const form = document.getElementById("form");
 	const formData = document.getElementsByName("reserve")[0];
 	const btnClose = document.getElementById("closeForm");
-	const message = document.getElementById("validate-message")
+	const message = document.getElementById("validate-message");
 	const modalBody = document.querySelector(".modal-body");
-	
 	const width = window.innerWidth;
+	const closeMdl = document.getElementById("closeModal");
+	const closeMsg = document.querySelector(".close-message");
 
 	formData.style.display = "none";
 	btnClose.classList.remove("btn-hide");
 	btnClose.classList.add("btn-show");
+	closeMdl.style.display = "none";
+	closeMsg.style.display = "block";
 	message.style.display = "block";
 	message.style.textAlign = "center";
 	message.style.fontSize = "36px";
@@ -106,8 +180,40 @@ function msgValidate(){
 	modalBody.style.display = "flex";
 	modalBody.style.justifyContent = "center";
 	modalBody.style.alignItems = "center";
-
 	btnClose.addEventListener("click", () => {
+		input = {
+			firstName: false,
+			lastName: false,
+			email: false,
+			birthdate: false,
+			quantity: false,
+			location: false,
+			terms: false
+		}
+		form.reset();
+		formData.style.display = "block";
+		btnClose.classList.remove("btn-show");
+		btnClose.classList.add("btn-hide");
+		message.style.display = "none";
 		closeModal();
 	})
+
+	closeMsg.addEventListener("click", () => {
+		input = {
+			firstName: false,
+			lastName: false,
+			email: false,
+			birthdate: false,
+			quantity: false,
+			location: false,
+			terms: false
+		}
+		form.reset();
+		formData.style.display = "block";
+		btnClose.classList.remove("btn-show");
+		btnClose.classList.add("btn-hide");
+		message.style.display = "none";
+		closeModal();
+	})
+	return false;
 }

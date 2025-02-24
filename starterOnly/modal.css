@@ -287,6 +287,9 @@ input[data-error]::after {
 .close:after {
   transform: rotate(-45deg);
 }
+.close-message{
+  display: none;
+}
 .btn-submit,
 .btn-signup {
   background: #fe142f;
@@ -299,6 +302,13 @@ input[data-error]::after {
   cursor: pointer;
   border: 0;
 }
+
+.btn-disabled {
+  background: #ccc;
+  color: #fff;
+  cursor: not-allowed;
+}
+
 /* custom select styles */
 .custom-select {
   position: relative;
