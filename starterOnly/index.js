@@ -82,15 +82,19 @@ function validate(){
 }
 
 function msgValidate(){
-	console.log("msgValidate");
+	const form = document.getElementById("form");
 	const formData = document.getElementsByName("reserve")[0];
 	const btnClose = document.getElementById("closeForm");
 	const message = document.getElementById("validate-message")
 	const modalBody = document.querySelector(".modal-body");
+	const closeMessage = document.querySelector(".close-message");
+	const close = document.querySelector(".close");
 	
 	const width = window.innerWidth;
 
 	formData.style.display = "none";
+	close.style.display = "none";
+	closeMessage.style.display = "block";
 	btnClose.classList.remove("btn-hide");
 	btnClose.classList.add("btn-show");
 	message.style.display = "block";
@@ -108,6 +112,24 @@ function msgValidate(){
 	modalBody.style.alignItems = "center";
 
 	btnClose.addEventListener("click", () => {
+		form.reset();
+		formData.style.display = "block";
+		btnClose.classList.remove("btn-show");
+		btnClose.classList.add("btn-hide");
+		message.style.display = "none";
+		modalBody.style.height = "auto";
+		closeModal();
+	})
+
+	closeMessage.addEventListener("click", () => {
+		form.reset();
+		formData.style.display = "block";
+		btnClose.classList.remove("btn-show");
+		btnClose.classList.add("btn-hide");
+		message.style.display = "none";
+		modalBody.style.height = "auto";
+		closeMessage.style.display = "none";
+		close.style.display = "block";
 		closeModal();
 	})
 }
