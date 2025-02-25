@@ -56,16 +56,14 @@
 
       <div class="bground">
         <div class="content">
-          <span id="closeModal" class="close" onclick="closeModal()"></span>
-          <span class="close-message close" onclick="closeModal()"></span>
+          <span class="close" onclick="closeModal()"></span>
           <div class="modal-body">
             <h2 id="validate-message">Merci ! Votre réservation a été reçue</h2>
             <form
-              id="form"
               name="reserve"
               action="index.html"
               method="get"
-              onsubmit="return msgValidate()"
+              onsubmit="return validate();"
             >
               <div
                 class="formData">
@@ -211,11 +209,10 @@
                 <p class="error-message"></p>
               </div>
               <input
-                class="btn-submit btn-disabled"
+                class="btn-submit"
                 type="submit"
                 class="button"
                 value="C'est parti"
-                disabled
               />
             </form>
             <button id="closeForm" class="btn-submit btn-hide">Fermer</button>
