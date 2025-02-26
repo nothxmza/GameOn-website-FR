@@ -468,6 +468,7 @@ footer {
     float: right;
     display: block;
     background: none;
+    color:black;
   }
 
   .topnav.responsive {position: relative;}
@@ -486,6 +487,7 @@ footer {
     text-align: center;
   }
   .hero-text{
+    width: 100%!important;
     text-align: left;
   }
   .hero-section {
